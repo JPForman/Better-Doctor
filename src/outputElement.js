@@ -12,12 +12,25 @@ export function cardElement(doctorsList) {
       } else {
         patients = "This physician is currently accepting patients.";
       }
+
+      let infoArray = [doctorsList.data[i].practices[0].name, doctorsList.data[i].practices[0].visit_address.street, doctorsList.data[i].practices[0].visit_address.street2, doctorsList.data[i].practices[0].visit_address.city, doctorsList.data[i].practices[0].visit_address.state, doctorsList.data[i].practices[0].visit_address.zip, doctorsList.data[i].practices[0].phones[0].number, doctorsList.data[i].practices[0].website, patients];
+
+      let cleanArray = []
+
+      infoArray.forEach(function(info){
+        if (info === "undefined") {
+          cleanArray.push("");
+        } else {
+          cleanArray.push(info);
+        }
+      });
+
       $('#docOutput').append(`<div class='doctorCard'>
-      <p>${doctorsList.data[i].practices[0].name}</p>
-      <p>${doctorsList.data[i].practices[0].visit_address.street}, ${doctorsList.data[i].practices[0].visit_address.street2}</p>
-      <p>${doctorsList.data[i].practices[0].visit_address.city}, ${doctorsList.data[i].practices[0].visit_address.state}, ${doctorsList.data[i].practices[0].visit_address.zip}</p>
-      <p>${doctorsList.data[i].practices[0].phones[0].number}</p>
-      <p>${doctorsList.data[i].practices[0].website}</p>
+      <p>${cleanArray[0]}</p>
+      <p>${cleanArray[1]}, ${cleanArray[2]}</p>
+      <p>${cleanArray[3]}, ${cleanArray[4]}, ${cleanArray[5]}</p>
+      <p>${cleanArray[6]}</p>
+      <p>${cleanArray[7]}</p>
       <p>${patients}</p>
       </div>`
     );
